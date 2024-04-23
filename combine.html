@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noble Hospital Greeting</title>
+  <style>
+    body {
+      background-image: url('image.jpeg');
+      background-repeat: no-repeat; 
+      background-size: cover; 
+      position: relative;
+    }
+
+    .top-right {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .top-right div {
+      margin-left: 10px;
+      cursor: pointer; 
+    }
+
+    .medical-record-link {
+      display: none; /* Hide the link by default */
+    }
+
+    .medical-record-link a {
+      color: red; /* Change link color to red */
+      animation: blink-animation 1s infinite; /* Add blinking animation */
+    }
+
+    @keyframes blink-animation {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to Noble Hospital!</h1>
+  <div class="top-right">
+    <div>
+      <select onchange="showInfo()">
+        <option selected disabled>Home</option>
+        <option value="contact">Contact Details</option>
+        <option value="timings">Hospital Timings</option>
+        <option value="location">Location</option>
+      </select>
+    </div>
+    <div>
+      <input type="text" id="searchQuery" placeholder="Enter your query">
+      <button type="button" onclick="searchQuery()">Search</button>
+    </div>
+  </div>
+  <p>Please enter your name and phone number:</p>
+  <form id="userForm" onsubmit="return submitForm(event)">
+    <input type="text" name="name" id="nameInput" placeholder="Enter your name" required>
+    <br><br>
+    <input type="tel" name="phone" id="phoneInput" placeholder="Enter your phone number" required>
+    <br><br>
+    <button type="submit">Submit</button>
+  </form>
+  <div id="greeting"></div>
+  <div class="medical-record-link" id="medicalRecordLink">
+    <a href="medical_record.html">CLICK FOR COUPON!</a>
+  </div>
+
+  <script>
+    function submitForm(event) {
+      event.preventDefault(); // Prevent form submission
+      var name = document.getElementById('nameInput').value.trim();
+      var phone = document.getElementById('phoneInput').value.trim();
+      if (name === "" || phone === "") {
+        alert("Please enter both name and phone number.");
+        return false; // Prevent form submission
+      }
+      alert("Submitted"); // Display submission message
+      document.getElementById('medicalRecordLink').style.display = 'block'; // Show the medical record link
+      return true; // Allow form submission
+    }
+
+    function showInfo() {
+      var selectElement = document.querySelector('select');
+      var selectedOption = selectElement.options[selectElement.selectedIndex].value;
+      if (selectedOption === 'contact') {
+        alert("Contact Details:\nEmail: contact@noblehospital.com\nPhone: 9373353591");
+      } else if (selectedOption === 'timings') {
+        alert("Hospital Timings: 8:00 AM - 10:00 PM");
+      } else if (selectedOption === 'location') {
+        alert("Location: SB Road, Pune");
+      }
+    }
+
+    function searchQuery() {
+      var query = document.getElementById('searchQuery').value.trim();
+      if (query !== "") {
+        if (containsMaliciousScript(query)) {
+          alert("XSS Attack Detected!");
+        } else {
+          window.location.href = "query_not_found.html?query=" + encodeURIComponent(query);
+        }
+      } else {
+        alert("Please enter a query to search.");
+      }
+    }
+
+    function containsMaliciousScript(query) {
+      var scriptPattern = /<script[\s\S]*?>|<\/script>/gi;
+      return scriptPattern.test(query);
+    }
+  </script>
+</body>
+</html>

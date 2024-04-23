@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noble Hospital Greeting</title>
+  <style>
+    body {
+      background-image: url('image.jpeg');
+      background-repeat: no-repeat; 
+      background-size: cover; 
+      position: relative;
+    }
+
+    .top-right {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .top-right div {
+      margin-left: 10px;
+      cursor: pointer; 
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to Noble Hospital!</h1>
+  <div class="top-right">
+    <div>
+      <select onchange="showInfo()">
+        <option selected disabled>Home</option>
+        <option value="contact">Contact Details</option>
+        <option value="timings">Hospital Timings</option>
+        <option value="location">Location</option>
+      </select>
+    </div>
+    <div>
+      <input type="text" id="searchQuery" placeholder="Enter your query">
+      <button type="button" onclick="searchQuery()">Search</button>
+    </div>
+  </div>
+  <p>Please enter your details:</p>
+  <form id="userForm">
+    <input type="text" id="nameInput" placeholder="Enter your name">
+    <br><br>
+    <input type="tel" id="phoneInput" placeholder="Enter your phone number">
+    <br><br>
+    <button type="button" onclick="submitForm()">Submit</button>
+  </form>
+  <div id="greeting"></div>
+
+  <script>
+    function submitForm() {
+      var name = document.getElementById('nameInput').value.trim();
+      var phone = document.getElementById('phoneInput').value.trim();
+      if (name === "" || phone === "") {
+        alert("Please enter both name and phone number.");
+        return;
+      }
+      if (!validatePhone(phone)) {
+        alert("Please enter a valid phone number.");
+        return;
+      }
+      var otp = prompt("Please enter your OTP:");
+      if (otp !== null && otp !== "") {
+        if (!/^\d+$/.test(otp)) {
+          alert("OTP must contain only numbers.");
+          return;
+        }
+        var greeting = "Hello, " + name + "! Welcome to Noble Hospital!";
+        document.getElementById('greeting').innerHTML = greeting;
+        alert("OTP submitted successfully!");
+      } else {
+        alert("Please enter a valid OTP!");
+      }
+    }
+
+    function validatePhone(phone) {
+      var phoneRegex = /^\d{10}$/;
+      return phoneRegex.test(phone);
+    }
+
+    function showInfo() {
+      var selectElement = document.querySelector('select');
+      var selectedOption = selectElement.options[selectElement.selectedIndex].value;
+      if (selectedOption === 'contact') {
+        alert("Contact Details:\nEmail: contact@noblehospital.com\nPhone: 9373353591");
+      } else if (selectedOption === 'timings') {
+        alert("Hospital Timings: 8:00 AM - 10:00 PM");
+      } else if (selectedOption === 'location') {
+        alert("Location: SB Road, Pune");
+      }
+    }
+function searchQuery() {
+    var query = document.getElementById('searchQuery').value.trim();
+    if (query !== "") {
+        if (containsMaliciousScript(query)) {
+            alert("XSS Attack Detected!");
+        } else {
+        
+            window.location.href = "query_not_found.html?query=" + encodeURIComponent(query);
+        }
+    } else {
+        alert("Please enter a query to search.");
+    }
+}
+
+
+function containsMaliciousScript(query) {
+    var scriptPattern = /<script[\s\S]*?>|<\/script>/gi;
+    return scriptPattern.test(query);
+}
+
+
+    
+  </script>
+</body>
+</html>

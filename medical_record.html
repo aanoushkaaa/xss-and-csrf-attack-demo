@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Record</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .bg-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("file:///C:/Users/Admin/Desktop/college/Sem%204/AS/project/noble-hospital-backend/image.jpeg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            z-index: -1;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333; /* Text color */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Text shadow for better readability */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .confidential {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333; /* Red background */
+            color: red; /* White text */
+            text-align: center;
+            padding: 10px; /* Increased padding */
+            font-size: 20px; /* Increased font size */
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-image"></div> <!-- Background image div -->
+    <div class="container">
+        <h1>Noble Hospital Records</h1> <!-- Updated heading -->
+        <table>
+            <tr>
+                <th>Patient Name</th>
+                <td>Anoushka Pabalkar</td>
+            </tr>
+            <tr>
+                <th>Date of Birth</th>
+                <td>February 4, 2004</td>
+            </tr>
+            <tr>
+                <th>Blood Type</th>
+                <td>B+</td>
+            </tr>
+            <tr>
+                <th>Medical Conditions</th>
+                <td>Hypertension, Diabetes</td>
+            </tr>
+            <tr>
+                <th>Allergies</th>
+                <td>Penicillin</td>
+            </tr>
+            <tr>
+                <th>Medications</th>
+                <td>Combiflam, Dolo</td>
+            </tr>
+            <tr>
+                <th>Doctor</th>
+                <td>Dr. Joshi</td>
+            </tr>
+        </table>
+    </div>
+    <div class="confidential">
+        <marquee behavior="scroll" direction="left">CONFIDENTIAL!</marquee>
+    </div>
+</body>
+</html>
